@@ -1,14 +1,15 @@
 import { useCallback } from 'react';
 
 const navLinks = [
-  { label: 'Gallery', href: '#projects' },
+  { label: 'Gallery', href: '#/gallery' },
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    // In-page section anchors (#skills) scroll; route hashes (#/gallery) fall through to HashRouter.
+    if (href.startsWith('#') && !href.startsWith('#/')) {
       e.preventDefault();
       const id = href.replace('#', '');
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
