@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap');
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1b1b1b;
+  --bg-alt: #151515;
+  --bg-card: #111111;
+  --text: #e8e8e8;
+  --text-dim: #a0a0a0;
+  --accent: #DFFF00;
+  --accent-dim: rgba(223,255,0,0.15);
+  --muted: #6a6a6a;
+  --border: #2a2a2a;
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── Section Label ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+/* ── Bracket Links ── */
+.bracket-link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bracket-link:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════
+   3D CONE CAROUSEL — CRITICAL STYLES
+   ═══════════════════════════════════════════════ */
+
+.cone-wrap {
+  position: relative;
+  height: 700px;
+  user-select: none;
+  cursor: grab;
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+}
+@media(min-width: 1024px) {
+  .cone-wrap { height: 800px; }
+}
+.cone-wrap.dragging { cursor: grabbing; }
+
+.cone-tilt {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.cone-spin {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Individual 3D Card */
+.cone-card {
+  position: absolute;
+  display: block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  border-radius: 2px;
+  left: 0;
+  top: 0;
+}
+
+.cone-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cone-card:hover img { transform: scale(1.05); }
+
+/* Overlay */
+.cone-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 45%, transparent 100%);
+  opacity: 0.35;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.cone-card:hover .overlay { opacity: 1; }
+
+/* Info Panel */
+.cone-card .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.cone-card:hover .info {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cone-card .info-cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.cone-card .info-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+/* Corner Brackets */
+.cone-card .brackets {
+  position: absolute;
+  inset: 6px;
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.cone-card:hover .brackets { opacity: 1; }
+.cone-card .brackets::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+}
+.cone-card .brackets::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+
+/* ═══════════════════════════════════════════════
+   MARQUEE ANIMATIONS
+   ═══════════════════════════════════════════════ */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 28s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════ */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
