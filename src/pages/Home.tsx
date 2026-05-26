@@ -9,8 +9,8 @@ const skills = [
   { name: 'Emotional Range', value: 90 },
 ];
 const tools = ['Markers', 'Paper', 'Intuition', 'Heart', 'Eye', 'Brain', 'Love'];
-const awardItems = ['Outsider Art Visionary', 'Raw Intuitive Creator', '45 Works — My Eye Brain', 'Kuwait City Artist', 'Art Brut — Self-Taught'];
-const clientItems = ['Phase 1 — Abstract', 'Phase 2 — Ornamental', 'Phase 3 — Refined', 'My Eye Brain', '45 Original Works'];
+const awardItems = ['Outsider Art Visionary', 'Raw Intuitive Creator', '46 Works — My Eye Brain', 'Kuwait City Artist', 'Art Brut — Self-Taught'];
+const clientItems = ['Phase 1 — Abstract', 'Phase 2 — Ornamental', 'Phase 3 — Refined', 'My Eye Brain', '46 Original Works'];
 
 function SkillBar({ name, value }: { name: string; value: number }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -65,7 +65,7 @@ export default function Home() {
 
           {/* About Me */}
           <p className="mb-8" style={{ fontSize: '13px', color: '#a0a0a0', lineHeight: 1.7, maxWidth: '320px' }}>
-            I never studied ornamental art. My hand moves without planning — my eye sees, my brain feels, and what emerges is pure intuition. 45 works of bold lines, vivid color, and hearts that appear unbidden. This is not technique. This is my eye brain.
+            I never studied ornamental art. My hand moves without planning — my eye sees, my brain feels, and what emerges is pure intuition. 46 works of bold lines, vivid color, and hearts that appear unbidden. This is not technique. This is my eye brain.
           </p>
 
           {/* CTA */}

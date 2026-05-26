@@ -2,7 +2,7 @@ import { useRef, useEffect, useCallback } from 'react';
 import { artworks } from '@/data/artworks';
 
 /* ── 3D Cone Constants ── */
-const TOTAL_CARDS = 45;
+const TOTAL_CARDS = 46;
 const CARDS_PER_TURN = 15;
 const TOP_RADIUS = 320;
 const BOTTOM_RADIUS = 220;
